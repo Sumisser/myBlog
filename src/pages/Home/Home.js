@@ -4,7 +4,7 @@ import Nav from '../../components/Nav';
 import Logo from '../../components/Logo';
 import Footer from '../../components/Footer';
 import Menu from '../../components/Menu';
-import Input from './components/Input'
+import Input from './components/Input';
 
 import img from '../../assets/images/bg.jpeg';
 
@@ -13,6 +13,19 @@ const Home = () => {
     grayscale: '90%',
     blur: '3px'
   });
+  const login = value => {
+    if (value === '我命由我不由天！') {
+      changeBg();
+    } else {
+      changeBg();
+      setTimeout(() => {
+        setFilter({
+          grayscale: '70%',
+          blur: '3px'
+        });
+      }, 1500);
+    }
+  };
   const changeBg = () => {
     setFilter({
       grayscale: '0%',
@@ -23,8 +36,9 @@ const Home = () => {
     <div className='home'>
       <Nav />
       <section className='guide'>
-        <div className="menus">
-        <Menu /><Input/>
+        <div className='menus'>
+          <Menu />
+          <Input login={login} />
         </div>
         <div className='content'>
           <Logo className='logo' />
@@ -53,8 +67,8 @@ const Home = () => {
         }
         .menus {
           margin-left: 84px;
-          display:flex;
-          align-items:center;
+          display: flex;
+          align-items: center;
         }
         .content {
           padding-left: 100px;
@@ -70,14 +84,14 @@ const Home = () => {
           color: #52555a;
         }
         .bg {
-          margin-top: 50px;
           height: calc(100vh - 50px);
           background: url(${img}) no-repeat;
           background-size: contain;
           background-position: center;
-          filter: grayscale(${filter.grayscale})  blur(${filter.blur});
+          filter: grayscale(${filter.grayscale}) blur(${filter.blur});
           transition: all 1s;
           transition-timing-function: ease;
+          margin-top: 50px;
         }
       `}</style>
     </div>

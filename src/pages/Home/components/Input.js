@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Input = () => {
-  const handleSubmit = () => {};
+const Input = ({ login }) => {
+  const [value, setValue] = useState('');
+  const handleSubmit = e => {
+    e.preventDefault();
+    login(value);
+  };
+  const handleChange = e => {
+    setValue(e.target.value);
+  };
   return (
     <div className='input'>
       <form onSubmit={handleSubmit}>
-        <input type='text' />
+        <input type='text' value={value} onChange={handleChange} />
       </form>
       <style jsx>{`
         .input {
@@ -14,7 +21,7 @@ const Input = () => {
         input {
           height: 25px;
           width: 200px;
-          border: 1px solid #18191b;
+          border: 1px solid #ccc;
           outline: #e94328;
         }
       `}</style>
