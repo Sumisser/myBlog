@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Menu = () => {
-  const [menu, setMenu] = useState(false);
-  const toggleMenu = e => {
-    // e.stopPropagation();
-    setMenu(!menu);
+const Menu = ({ toggleInput,muneStatus }) => {
+  const toggleMenu = () => {
+    toggleInput(!muneStatus);
   };
-  const active = menu ? 'active' : '';
+  const active = muneStatus ? 'active' : '';
   return (
-    <div className='menu'>
-      <div className='btn-cont' onClick={toggleMenu}>
+    <div className='menu' onClick={toggleMenu}>
+      <div className='btn-cont'>
         <div className={`main-btn ${active}`}>
           <div className='custom-menu-toggle openMenu' />
         </div>
@@ -19,7 +17,7 @@ const Menu = () => {
       </div>
       <style jsx>{`
         .menu {
-          width:96px;
+          width: 96px;
           display: flex;
           align-items: center;
           justify-content: center;

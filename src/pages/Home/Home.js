@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import Nav from '../../components/Nav';
 import Logo from '../../components/Logo';
 import Footer from '../../components/Footer';
-import Menu from '../../components/Menu';
-import Input from './components/Input';
+import Login from './components/Login';
 
 import img from '../../assets/images/bg.jpeg';
 
@@ -13,7 +12,9 @@ const Home = () => {
     grayscale: '90%',
     blur: '3px'
   });
+
   const login = value => {
+    debugger;
     if (value === '我命由我不由天！') {
       changeBg();
     } else {
@@ -32,14 +33,13 @@ const Home = () => {
       blur: '0px'
     });
   };
+
+
   return (
     <div className='home'>
       <Nav />
       <section className='guide'>
-        <div className='menus'>
-          <Menu />
-          <Input login={login} />
-        </div>
+        <Login login={login}/>
         <div className='content'>
           <Logo className='logo' />
           <div className='text'>
@@ -48,7 +48,7 @@ const Home = () => {
         </div>
         <Footer className='footer' left='100' right='0' />
       </section>
-      <section className='bg' onClick={changeBg} />
+      <section className='bg' />
       <style jsx>{`
         .home {
           display: flex;
@@ -65,10 +65,11 @@ const Home = () => {
           flex-direction: column;
           justify-content: space-between;
         }
-        .menus {
+        .login {
           margin-left: 84px;
           display: flex;
           align-items: center;
+          z-index: 100;
         }
         .content {
           padding-left: 100px;

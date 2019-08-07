@@ -1,14 +1,18 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = ({ left = 0, right = 0 }) => {
   return (
     <footer className='footer'>
       <div className='copy-right'>©️ 2019 缥缈之境</div>
       <div className='icons'>
-        <i className='icon-font icon-shoucang' />
+        <FontAwesomeIcon icon={faHeart} />
+        &nbsp; Liu Huanyu
       </div>
       <style jsx>{`
         footer {
+          box-sizing: border-box;
           width: 100%;
           height: 80px;
           border-top: 1px solid #a7abb3;
@@ -16,10 +20,8 @@ const Footer = ({ left = 0, right = 0 }) => {
           align-items: center;
           justify-content: space-between;
           padding: 0 ${right}px 0 ${left}px;
-        }
-        .copy-right {
-          font-size: 12px;
           color: #a7abb3;
+          font-size: 14px;
         }
       `}</style>
     </footer>

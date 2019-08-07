@@ -39,7 +39,7 @@ const Blog = () => {
           );
         })}
       </div>
-      <Footer/>
+      <Footer left='100' right='100'/>
       <style jsx>{`
         .blog {
           position: relative;
