@@ -34,16 +34,20 @@ const Home = () => {
     });
   };
 
-
   return (
     <div className='home'>
       <Nav />
       <section className='guide'>
-        <Login login={login}/>
+        <Login login={login} />
         <div className='content'>
           <Logo className='logo' />
           <div className='text'>
-            是你告诉你给女士告诉过你是，三级送给你说了的故事，谁跟你说，十多年归属感，是的泥石流等那个.
+            <p>我要这天&emsp;再遮不住我眼</p>
+            <p>
+              &emsp;要这地&emsp;再埋不了我心
+              <p>&emsp;&emsp;要这众生&emsp;都明白我意</p>
+              <p>&emsp;&emsp;&emsp;要那诸佛&emsp;都烟消云散</p>
+            </p>
           </div>
         </div>
         <Footer className='footer' left='100' right='0' />
@@ -83,6 +87,9 @@ const Home = () => {
           width: 70%;
           margin-top: 80px;
           color: #52555a;
+        }
+        .text p{
+          margin: 20px 0;
         }
         .bg {
           height: calc(100vh - 50px);

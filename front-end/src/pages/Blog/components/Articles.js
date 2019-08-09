@@ -6,8 +6,8 @@ const Articles = ({title,body,postId}) => {
     <div className='articles'>
       <div className='space' />
       <h3 className='title'>{title}</h3>
-      <article>
-        {body}
+      <article dangerouslySetInnerHTML={{__html:body}}>
+        
       </article>
       <Link className="more" to={`/${postId}`}>阅读全文</Link>
       <style jsx>{`

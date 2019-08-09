@@ -9,9 +9,9 @@ const Nav = () => {
     { path: '/projects', text: '项 目' },
     { path: '/about', text: '关 于' }
   ];
-  const navLinks = links.map(link => {
+  const navLinks = links.map((link, index) => {
     return (
-      <li>
+      <li key={index}>
         <Link to={link.path}>
           {link.text}
           <Badge />
@@ -48,7 +48,7 @@ const Nav = () => {
           width: 30px;
           text-align: center;
         }
-        li a{
+        li a {
           margin: auto;
         }
         li .badge {
