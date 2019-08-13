@@ -5,7 +5,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 const Footer = ({ left = 0, right = 0 }) => {
   return (
     <footer className='footer'>
-      <div className='copy-right'>©️ 2019 缥缈之境</div>
+      <div className='copy-right'><span role="img" aria-label="copyright">©️ </span>2019 缥缈之境</div>
       <div className='icons'>
         <FontAwesomeIcon icon={faHeart} />
         &nbsp; Liu Huanyu

@@ -1,72 +1,103 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import BraftEditor from 'braft-editor';
-import 'braft-editor/dist/index.css';
+import Editor from 'for-editor';
+import axios from 'axios';
 
 import Logo from '../../components/Logo';
 import Footer from '../../components/Footer';
-import axios from 'axios';
 
 const Edit = props => {
-  const [editorState, setEditorState] = useState(null);
+  const [content, setContent] = useState('');
+  const [title, setTitle] = useState('');
 
-  const handleChange = editorState => {
-    setEditorState(editorState);
+  useEffect(() => {
+    console.log(props);
+    if (props.location.id) {
+      getDetail(props.location.id);
+    }
+    console.log(content);
+  }, []);
+
+  const getDetail = async id => {
+    const { data: post } = await axios(`http://localhost:8080/blog/${id}`);
+    debugger;
+    setTitle(post.title);
+    setContent(post.content);
   };
   const handleSave = async () => {
-    const html = editorState? editorState.toHTML() : '';
-    const reg = /^(<\w+>\s*<\/\w+>)+$/
-    try {
-      if (!reg.test(html)) {
-        await axios({
-          method: 'post',
-          url: 'http://localhost:8080/blog',
-          data: {
-            html
-          }
-        });
-        console.log(html)
-      }
-
-      setEditorState(BraftEditor.createEditorState(''));
+    const method = props.location.id ? 'put' : 'post';
+    const url = props.location.id ? `/blog/${props.location.id}` : '/blog';
+    if (!title || !content) {
       props.history.goBack();
-    } catch (error) {
-      console.log(error);
+      return;
     }
+    await axios({
+      method,
+      url: `http://localhost:8080${url}`,
+      data: {
+        title,
+        content
+      }
+    }).finally(() => {
+      props.history.goBack();
+    });
   };
-  const extendControls = [
-    {
-      key: 'custom-button',
-      type: 'button',
-      text: '保存退出',
-      onClick: handleSave
-    }
-  ];
-
   return (
     <div>
       <header>
         <Logo />
       </header>
-      <section className='editor'>
-        <BraftEditor
-          value={editorState}
-          onChange={handleChange}
-          extendControls={extendControls}
+      <section className='content'>
+        <div className='title'>
+          <input
+            type='text'
+            value={title}
+            placeholder='请输入标题'
+            onChange={e => {
+              setTitle(e.target.value);
+            }}
+          />
+        </div>
+        <Editor
+          value={content}
+          onChange={value => {
+            setContent(value);
+          }}
+          onSave={handleSave}
         />
       </section>
       <Footer left='100' right='100' />
       <style jsx>{`
         header {
-          height: 200px;
+          height: 150px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .editor {
-          padding: 0 100px 0;
+        .content {
+          box-sizing: border-box;
+          padding: 0 100px 50px 100px;
           margin: auto;
-          min-height: calc(100vh - 280px);
+          min-height: calc(100vh - 380px);
+        }
+        .title {
+          margin-bottom: 50px;
+        }
+        input {
+          font-size: 18px;
+          width: 300px;
+          border: none;
+          outline: none;
+          padding: 10px 10px 10px 5px;
+          border-bottom: 2px solid rgba(0, 0, 0, 0);
+        }
+        input::placeholder {
+          color: #e0e0e0;
+          font-style: italic;
+        }
+        input:focus {
+          border-bottom: 2px solid #52555a;
+          transition: all 0.7s ease;
         }
       `}</style>
     </div>

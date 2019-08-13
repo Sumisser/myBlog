@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const Articles = ({title,body,postId}) => {
+
+import DeleteButton from './DeleteButton';
+
+const Articles = ({ title, body, postId,deleteBlog }) => {
+  const [deleteVisible, setDeleteVisible] = useState(false);
+  const toggleDelete = e => {
+    let visible = e.type === 'mouseenter'
+    setDeleteVisible(visible);
+  };
+  
   return (
     <div className='articles'>
       <div className='space' />
-      <h3 className='title'>{title}</h3>
-      <article dangerouslySetInnerHTML={{__html:body}}>
-        
-      </article>
-      <Link className="more" to={`/${postId}`}>阅读全文</Link>
+      <h3 className='title' onMouseEnter={toggleDelete} onMouseLeave={toggleDelete}>
+        <span className='name'>{title}</span>
+        <DeleteButton visible={deleteVisible} deleteBlog={deleteBlog} postId={postId} />
+      </h3>
+      <article dangerouslySetInnerHTML={{ __html: body }} />
+      <Link className='more' to={`/${postId}`}>
+        阅读全文
+      </Link>
       <style jsx>{`
         .articles {
           padding: 0 100px;
@@ -24,16 +37,24 @@ const Articles = ({title,body,postId}) => {
         .articles h3 {
           font-size: 24px;
           margin: 30px 0 15px;
+          width: 100%;
+          min-width: 500px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+        .articles h3 .name{
+          margin-right: 20px;
         }
         article {
           max-width: 800px;
           font-size: 14px;
         }
-        .more{
-            display: block;
-            font-size: 14px;
-            margin-top: 10px;
-            color: #e9432b !important;
+        .more {
+          display: block;
+          font-size: 14px;
+          margin-top: 10px;
+          color: #e9432b !important;
         }
       `}</style>
     </div>
