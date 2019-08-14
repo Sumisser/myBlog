@@ -90,6 +90,8 @@ const Home = () => {
         }
         .text p{
           margin: 20px 0;
+          font-size: 20px;
+          font-family:'hdjxingshu1b344c5f3420564';
         }
         .bg {
           height: calc(100vh - 50px);

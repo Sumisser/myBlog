@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Editor from 'for-editor';
+import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 
 import Logo from '../../components/Logo';
@@ -49,13 +50,22 @@ const Edit = props => {
       </header>
       <section className='content'>
         <div className='title'>
-          <input
+          {/* <input
             type='text'
             value={title}
             placeholder='请输入标题'
             onChange={e => {
               setTitle(e.target.value);
             }}
+          /> */}
+          <TextField
+            id='title'
+            value={title}
+            onChange={e => {
+              setTitle(e.target.value);
+            }}
+            placeholder='输入标题'
+            label='标题'
           />
         </div>
         <Editor
@@ -83,6 +93,13 @@ const Edit = props => {
         .title {
           margin-bottom: 50px;
         }
+        label.Mui-focused {
+          color: #e9432b !important;
+        }
+        .MuiInput-underline:after {
+          border-bottom-color: #e9432b;
+        }
+
         input {
           font-size: 18px;
           width: 300px;

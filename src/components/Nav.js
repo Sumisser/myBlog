@@ -40,6 +40,7 @@ const Nav = () => {
           align-items: center;
           justify-content: space-around;
           height: 100%;
+          list-style-type: none;
         }
         li {
           writing-mode: vertical-lr;
@@ -47,6 +48,7 @@ const Nav = () => {
           position: relative;
           width: 30px;
           text-align: center;
+          list-style-type: none;
         }
         li a {
           margin: auto;

@@ -7,6 +7,7 @@ import BlogDetails from './pages/BlogDetails/BlogDetails';
 import Projects from './pages/Projects/Projects';
 import About from './pages/About/About';
 import Edit from './pages/Edit/Edit';
+import NotMatch from './pages/NotMatch'
 
 function App() {
   return (
@@ -14,12 +15,13 @@ function App() {
       <Switch>
         {/* <Route exact path='/' component={Home} /> */}
         <Route path='/home' component={Home} />
+        <Route path='/blog/:id' component={BlogDetails} />
         <Route path='/blog' component={Blog} />
         <Route path='/projects' component={Projects} />
         <Route path='/about' component={About} />
         <Route path='/edit' component={Edit} />
-        <Route path='/:id' component={BlogDetails} />
-        <Redirect from='/' to='/home'/>
+        <Redirect exact from='/' to='/home'/>
+        <Route component={NotMatch}/>
       </Switch>
     </Router>
   );

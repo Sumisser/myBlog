@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 
 import DeleteButton from './DeleteButton';
@@ -20,7 +19,7 @@ const Articles = ({ title, body, postId,deleteBlog }) => {
         <DeleteButton visible={deleteVisible} deleteBlog={deleteBlog} postId={postId} />
       </h3>
       <article dangerouslySetInnerHTML={{ __html: body }} />
-      <Link className='more' to={`/${postId}`}>
+      <Link className='more' to={`/blog/${postId}`}>
         阅读全文
       </Link>
       <style jsx>{`
@@ -39,6 +38,7 @@ const Articles = ({ title, body, postId,deleteBlog }) => {
           margin: 30px 0 15px;
           width: 100%;
           min-width: 500px;
+          min-height: 32px;
           cursor: pointer;
           display: flex;
           align-items: center;
