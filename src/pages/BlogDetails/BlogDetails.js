@@ -28,15 +28,11 @@ const BlogDetails = props => {
 
   useEffect(() => {
     const getPostDetails = async () => {
-      try {
-        const { data: post } = await axios(`http://localhost:8080/blog/${id}`);
-        setPost(post);
-      } catch (error) {
-        console.log(error.response);
-      }
+      const { data: post } = await axios(`http://localhost:8080/blog/${id}`);
+      setPost(post);
     };
     getPostDetails();
-  }, []);
+  }, [props, id]);
   return (
     <div>
       <header>
@@ -61,17 +57,19 @@ const BlogDetails = props => {
             width={50}
           />
         )}
-        <ThemeProvider theme={theme}>
-          <Link
-            to={{
-              pathname: '/edit',
-              id
-            }}>
-            <Fab color='secondary' aria-label='edit' className='btn'>
-              <EditIcon />
-            </Fab>
-          </Link>
-        </ThemeProvider>
+        {window.localStorage.getItem('token') && (
+          <ThemeProvider theme={theme}>
+            <Link
+              to={{
+                pathname: '/edit',
+                id
+              }}>
+              <Fab color='secondary' aria-label='edit' className='btn'>
+                <EditIcon />
+              </Fab>
+            </Link>
+          </ThemeProvider>
+        )}
       </section>
       <Footer left='100' right='100' />
       <style jsx>{`

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from '../../util/axios';
 
 import Nav from '../../components/Nav';
 import Logo from '../../components/Logo';
@@ -8,23 +9,39 @@ import Login from './components/Login';
 import img from '../../assets/images/bg.jpeg';
 
 const Home = () => {
+  const isLogin = window.localStorage.getItem('token');
   const [filter, setFilter] = useState({
     grayscale: '90%',
     blur: '3px'
   });
 
-  const login = value => {
-    debugger;
-    if (value === '我命由我不由天！') {
+  const login = async password => {
+    try {
+      const { data: token } = await axios({
+        method: 'post',
+        url: 'login',
+        data: {
+          password
+        }
+      });
+      localStorage.setItem('token', token);
       changeBg();
-    } else {
-      changeBg();
-      setTimeout(() => {
+    } catch (error) {
+      localStorage.removeItem('token');
+      if (isLogin) {
         setFilter({
           grayscale: '70%',
           blur: '3px'
         });
-      }, 1500);
+      } else {
+        changeBg();
+        setTimeout(() => {
+          setFilter({
+            grayscale: '70%',
+            blur: '3px'
+          });
+        }, 1500);
+      }
     }
   };
   const changeBg = () => {
@@ -88,17 +105,18 @@ const Home = () => {
           margin-top: 80px;
           color: #52555a;
         }
-        .text p{
+        .text p {
           margin: 20px 0;
           font-size: 20px;
-          font-family:'hdjxingshu1b344c5f3420564';
+          font-family: 'hdjxingshu1b344c5f3420564';
         }
         .bg {
           height: calc(100vh - 50px);
           background: url(${img}) no-repeat;
           background-size: contain;
           background-position: center;
-          filter: grayscale(${filter.grayscale}) blur(${filter.blur});
+          filter: grayscale(${isLogin ? '0' : filter.grayscale})
+            blur(${isLogin ? '0' : filter.blur});
           transition: all 1s;
           transition-timing-function: ease;
           margin-top: 50px;

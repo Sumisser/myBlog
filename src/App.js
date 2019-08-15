@@ -14,13 +14,14 @@ function App() {
     <Router>
       <Switch>
         {/* <Route exact path='/' component={Home} /> */}
+        <Redirect exact from='/' to='/home'/>
         <Route path='/home' component={Home} />
         <Route path='/blog/:id' component={BlogDetails} />
         <Route path='/blog' component={Blog} />
         <Route path='/projects' component={Projects} />
         <Route path='/about' component={About} />
         <Route path='/edit' component={Edit} />
-        <Redirect exact from='/' to='/home'/>
+        <Route path='/404' component={NotMatch}/>
         <Route component={NotMatch}/>
       </Switch>
     </Router>

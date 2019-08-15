@@ -127,13 +127,15 @@ const Blog = () => {
             />
           )}
         </div>
-        <ThemeProvider theme={theme}>
-          <Link to='/edit'>
-            <Fab color='secondary' aria-label='add' className='btn'>
-              <AddIcon />
-            </Fab>
-          </Link>
-        </ThemeProvider>
+        {window.localStorage.getItem('token') && (
+          <ThemeProvider theme={theme}>
+            <Link to='/edit'>
+              <Fab color='secondary' aria-label='add' className='btn'>
+                <AddIcon />
+              </Fab>
+            </Link>
+          </ThemeProvider>
+        )}
       </div>
       <Footer left='100' right='100' />
 

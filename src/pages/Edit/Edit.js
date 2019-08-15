@@ -12,16 +12,16 @@ const Edit = props => {
   const [title, setTitle] = useState('');
 
   useEffect(() => {
-    console.log(props);
+    if (!window.localStorage.getItem('token')) {
+      props.history.push('/');
+    }
     if (props.location.id) {
       getDetail(props.location.id);
     }
-    console.log(content);
-  }, []);
+  }, [props]);
 
   const getDetail = async id => {
     const { data: post } = await axios(`http://localhost:8080/blog/${id}`);
-    debugger;
     setTitle(post.title);
     setContent(post.content);
   };

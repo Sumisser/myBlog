@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 import DeleteButton from './DeleteButton';
 
-const Articles = ({ title, body, postId,deleteBlog }) => {
+const Articles = ({ title, body, postId, deleteBlog }) => {
   const [deleteVisible, setDeleteVisible] = useState(false);
   const toggleDelete = e => {
-    let visible = e.type === 'mouseenter'
+    let visible = e.type === 'mouseenter';
     setDeleteVisible(visible);
   };
-  
+
   return (
     <div className='articles'>
-      <div className='space' />
-      <h3 className='title' onMouseEnter={toggleDelete} onMouseLeave={toggleDelete}>
+      <div className='space'/>
+      <h3
+        className='title'
+        onMouseEnter={toggleDelete}
+        onMouseLeave={toggleDelete}>
         <span className='name'>{title}</span>
-        <DeleteButton visible={deleteVisible} deleteBlog={deleteBlog} postId={postId} />
+        {window.localStorage.getItem('token') && (
+          <DeleteButton
+            visible={deleteVisible}
+            deleteBlog={deleteBlog}
+            postId={postId}
+          />
+        )}
       </h3>
       <article dangerouslySetInnerHTML={{ __html: body }} />
       <Link className='more' to={`/blog/${postId}`}>
@@ -43,7 +51,7 @@ const Articles = ({ title, body, postId,deleteBlog }) => {
           display: flex;
           align-items: center;
         }
-        .articles h3 .name{
+        .articles h3 .name {
           margin-right: 20px;
         }
         article {
