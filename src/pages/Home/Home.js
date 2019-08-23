@@ -11,7 +11,7 @@ import img from '../../assets/images/bg.jpeg';
 const Home = () => {
   const isLogin = window.localStorage.getItem('token');
   const [filter, setFilter] = useState({
-    grayscale: '90%',
+    grayscale: '70%',
     blur: '3px'
   });
 

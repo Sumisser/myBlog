@@ -21,7 +21,7 @@ const Edit = props => {
   }, [props]);
 
   const getDetail = async id => {
-    const { data: post } = await axios(`http://localhost:8080/blog/${id}`);
+    const { data: post } = await axios(`blog/${id}`);
     setTitle(post.title);
     setContent(post.content);
   };
@@ -34,7 +34,7 @@ const Edit = props => {
     }
     await axios({
       method,
-      url: `http://localhost:8080${url}`,
+      url,
       data: {
         title,
         content
@@ -50,14 +50,6 @@ const Edit = props => {
       </header>
       <section className='content'>
         <div className='title'>
-          {/* <input
-            type='text'
-            value={title}
-            placeholder='请输入标题'
-            onChange={e => {
-              setTitle(e.target.value);
-            }}
-          /> */}
           <TextField
             id='title'
             value={title}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Menu = ({ toggleInput,muneStatus }) => {
+const Menu = ({ toggleInput, muneStatus }) => {
   const toggleMenu = () => {
     toggleInput(!muneStatus);
   };
